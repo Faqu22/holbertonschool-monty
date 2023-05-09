@@ -17,7 +17,6 @@ void free_arr(char **array)
 char *get_command(FILE *f)
 {
 	char *string = NULL;
-	int i;
 
 	string = malloc(100);
 	if (string == NULL)
@@ -26,7 +25,7 @@ char *get_command(FILE *f)
 	return (string);
 }
 
-void **split_command(char *string, char *parameter)
+void split_command(char *string, char *parameter)
 {
 	char *copy_input = NULL, *token = NULL;
 	int len = 0;
@@ -38,7 +37,9 @@ void **split_command(char *string, char *parameter)
 
 	segm = (char **)malloc(sizeof(char *) * (len + 1));
 	if (segm == NULL)
-		return (NULL);
+	{
+		return;
+	}
 	copy_input = strdup(string);
 	token = strtok(copy_input, parameter);
 	for (len = 0; token; len++)
@@ -47,10 +48,10 @@ void **split_command(char *string, char *parameter)
 		token = strtok(NULL, parameter);
 	}
 	segm[len] = NULL;
-
+	return;
 }
 
-void _push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	stack_t *new = NULL;
 	stack_t *temp = *stack;

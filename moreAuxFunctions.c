@@ -7,7 +7,7 @@
  * Return: the number of nodes
  */
 
-void _pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	while ((*stack) != NULL)
 	{
