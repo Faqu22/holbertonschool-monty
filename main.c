@@ -33,6 +33,8 @@ int main(int argc, char **argv)
     while(1)
     {
         command = get_command(file);
+        if (command == "\n")
+            continue;
         if (command == NULL)
         {
             break;
