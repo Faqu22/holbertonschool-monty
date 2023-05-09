@@ -35,7 +35,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-char **opcode = NULL;
+
 
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
@@ -44,7 +44,9 @@ void _pop(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
-
-char *get_command(void);
-char **split_command(char *string, char *parameter);
+void free_stack(stack_t *head);
+char *get_command(FILE *f);
+void **split_command(char *string, char *parameter);
+void free_arr(char **array);
+void print_dlistint(const stack_t *h);
 #endif
