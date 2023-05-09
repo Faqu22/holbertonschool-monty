@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
     if(argc != 2)
     {
-        fprintf(stderr, "USAGE: monty file");
+        fprintf(stderr, "USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
     file = fopen(argv[1], "r");
@@ -40,7 +40,16 @@ int main(int argc, char **argv)
         split_command(command, " \n\t");
         for(i = 0; function[i].opcode != NULL; i++)
             if(strcmp(function[i].opcode, segm[0]) == 0)
-                    function[i].f(&list, line_number);
+            {
+                function[i].f(&list, line_number);
+                break;
+            }
+        if (function[i].opcode == NULL)
+            {
+                fprintf(stderr, "L%i: unknown instruction %s\n", line_number, segm[0]);
+                exit(EXIT_FAILURE);
+            }
+
         line_number++;
         if (segm != NULL)
             free_arr(segm);

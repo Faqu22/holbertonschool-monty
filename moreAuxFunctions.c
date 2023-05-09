@@ -9,13 +9,17 @@
 
 void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
-	while ((*stack) != NULL)
+    stack_t *temp = *stack;
+
+	while (temp != NULL)
 	{
-		if ((*stack)->n)
-			printf("%i", (*stack)->n);
+		if (temp->n)
+			printf("%i", temp->n);
 		else
 			printf("%i", 0);
 		printf("\n");
-		(*stack) = (*stack)->next;
+		temp = temp->next;
 	}
+  
+
 }
