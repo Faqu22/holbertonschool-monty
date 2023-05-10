@@ -31,7 +31,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d", (*stack)->n);
+	printf("%d\n", (*stack)->n);
 }
 
 void _pop(stack_t **stack, unsigned int line_number)
@@ -40,12 +40,12 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 	if(!(*stack))
 		{
-			fprintf(stderr, "L%d: stack too short\n", line_number);
+			fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-
-	*stack = (*stack)->next;
-	free(temp);
+    if ((*stack)->next)
+	    *stack = (*stack)->next;
+    free(temp);
 	(*stack)->prev = NULL;
 }
 
