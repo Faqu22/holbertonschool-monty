@@ -6,9 +6,9 @@ int main(int argc, char **argv)
 {
     instruction_t function[] = {{"push", _push},
                                 {"pall", _pall},
-                                /*{"pint", _pint},
+                                {"pint", _pint},
                                 {"pop", _pop},
-                                {"swap", _swap},
+                               /* {"swap", _swap},
                                 {"add", _add},
                                 {"nop", _nop},*/
                                 {NULL, NULL}};
@@ -33,13 +33,16 @@ int main(int argc, char **argv)
     while(1)
     {
         command = get_command(file);
-        if (command == "\n")
-            continue;
         if (command == NULL)
         {
             break;
         }
+
         split_command(command, " \n\t");
+        free(command);
+        if (segm == NULL)
+            continue;
+
         for(i = 0; function[i].opcode != NULL; i++)
             if(strcmp(function[i].opcode, segm[0]) == 0)
             {

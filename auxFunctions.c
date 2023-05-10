@@ -16,46 +16,59 @@ void free_arr(char **array)
 
 char *get_command(FILE *f)
 {
-	char *string = NULL;
+	char *string = NULL, *str = NULL;
 
 	string = malloc(100);
 	if (string == NULL)
 		return (NULL);
-	string = fgets(string, 100, f);
-	return (string);
+	str = fgets(string, 100, f);
+	if (str == NULL)
+		free(string);
+	return (str);
 }
 
 void split_command(char *string, char *parameter)
 {
 	char *copy_input = NULL, *token = NULL;
-	int len = 0;
+	int len = 2;
 
 	copy_input = strdup(string);
 	token = strtok(copy_input, parameter);
-	for (len = 0; token; len++)
-		token = strtok(NULL, parameter);
-
+	if (!token)
+		{
+			free(copy_input);
+			segm = NULL;
+			return;
+		}
 	segm = (char **)malloc(sizeof(char *) * (len + 1));
 	if (segm == NULL)
 	{
+		free(copy_input);
 		return;
 	}
-	copy_input = strdup(string);
-	token = strtok(copy_input, parameter);
-	for (len = 0; token; len++)
+	for (len = 0; len < 2 && token; len++)
 	{
 		segm[len] = strdup(token);
 		token = strtok(NULL, parameter);
 	}
+	free(copy_input);
 	segm[len] = NULL;
 	return;
 }
 
-void _push(stack_t **stack, unsigned int __attribute__((unused)) line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new = NULL;
 	stack_t *temp = *stack;
-
+	int i = 0;
+	
+	for(; segm[1][i] != '\0'; i++)
+		if(strchr("0123456789", segm[1][i]) == NULL)
+		{
+			free_arr(segm);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 		return;
