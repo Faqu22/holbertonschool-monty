@@ -8,9 +8,9 @@ int main(int argc, char **argv)
                                 {"pall", _pall},
                                 {"pint", _pint},
                                 {"pop", _pop},
-                               /* {"swap", _swap},*/
+                                {"swap", _swap},
                                 {"add", _add},
-                               /* {"nop", _nop},*/
+                                {"nop", _nop},
                                 {NULL, NULL}};
     stack_t *list = NULL;
     char *command = NULL;
