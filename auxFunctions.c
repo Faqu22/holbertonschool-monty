@@ -96,19 +96,13 @@ void _push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * free_dlistint - free a list.
+ * free_stack - free a list.
  *
  * @head: list a free.
  */
 void free_stack(stack_t *head)
 {
-	stack_t *current = head;
-	stack_t *temp;
-
-	while (current != NULL)
-	{
-		temp = current;
-		current = current->next;
-		free(temp);
-	}
+	if (head)
+		free_stack(head->next);
+	free(head);
 }
