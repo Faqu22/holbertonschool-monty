@@ -2,7 +2,11 @@
 
 extern char **segm;
 
-
+/**
+ * free_arr - free all the array
+ * @array: array to free
+ * Return: nothing
+ */
 void free_arr(char **array)
 {
     int i = 0;
@@ -13,6 +17,12 @@ void free_arr(char **array)
 		free(array[i]);
 	free(array);
 }
+
+/**
+ * get_command - take commands from file f
+ * @f: file
+ * Return: returns the address of the memory with commands
+ */
 
 char *get_command(FILE *f)
 {
@@ -26,7 +36,12 @@ char *get_command(FILE *f)
 		free(string);
 	return (str);
 }
-
+/**
+ * split_buff - split a command line
+ * @string: string whit commands 
+ * @parameter: string with separator characters
+ * Return: nothing
+ */
 void split_command(char *string, char *parameter)
 {
 	char *copy_input = NULL, *token = NULL;
@@ -55,6 +70,13 @@ void split_command(char *string, char *parameter)
 	segm[len] = NULL;
 	return;
 }
+
+/**
+ * _push - add a node to the top of the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
 
 void _push(stack_t **stack, unsigned int line_number)
 {
@@ -97,8 +119,8 @@ void _push(stack_t **stack, unsigned int line_number)
 
 /**
  * free_stack - free a list.
- *
  * @head: list a free.
+ * Return: nothing
  */
 void free_stack(stack_t *head)
 {

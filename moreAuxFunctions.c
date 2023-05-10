@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * print_dlistint - print all the elements of list.
- *
- * @h: an list.
- * Return: the number of nodes
+ * _pall - print all the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
  */
 
 void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
@@ -24,6 +24,13 @@ void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 
 }
 
+/**
+ * _pint - print the top of the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
+
 void _pint(stack_t **stack, unsigned int line_number)
 {
 	if(!(*stack))
@@ -33,6 +40,13 @@ void _pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", (*stack)->n);
 }
+
+/**
+ * _pop - delete the top of the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
 
 void _pop(stack_t **stack, unsigned int line_number)
 {
@@ -52,6 +66,13 @@ void _pop(stack_t **stack, unsigned int line_number)
     free(temp);
 }
 
+/**
+ * _add - adds the value of the top node of the stack
+ * to the next node and removes the top node of the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
 
 void _add(stack_t **stack, unsigned int line_number)
 {
@@ -70,6 +91,13 @@ void _add(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = NULL;
     (*stack)->n = (*stack)->n + i;
 }
+
+/**
+ * _swap - Exchange the values between the top node and the next one
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
 
 void _swap(stack_t **stack, unsigned int line_number)
 {
