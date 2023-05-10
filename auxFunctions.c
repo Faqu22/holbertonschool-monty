@@ -37,7 +37,7 @@ char *get_command(FILE *f)
 	return (str);
 }
 /**
- * split_buff - split a command line
+ * split_command - split a command line
  * @string: string whit commands 
  * @parameter: string with separator characters
  * Return: nothing

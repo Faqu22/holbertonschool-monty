@@ -33,7 +33,10 @@ int main(int argc, char **argv)
         split_command(command, " \n\t");
         free(command);
         if (segm == NULL)
+        {
+            line_number++;
             continue;
+        }
         for(i = 0; function[i].opcode != NULL; i++)
             if(strcmp(function[i].opcode, segm[0]) == 0)
             {
