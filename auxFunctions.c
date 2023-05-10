@@ -61,10 +61,18 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *new = NULL;
 	stack_t *temp = *stack;
 	int i = 0;
-	
-	for(; segm[1][i] != '\0'; i++)
-		if(strchr("0123456789", segm[1][i]) == NULL)
+
+	if(!(segm[1]))
 		{
+			free_stack(*stack);
+			free_arr(segm);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	for(; segm[1][i] != '\0'; i++)
+		if(strchr("-0123456789", segm[1][i]) == NULL)
+		{
+			free_stack(*stack);
 			free_arr(segm);
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
