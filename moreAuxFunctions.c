@@ -9,7 +9,7 @@
 
 void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
-    stack_t *temp = *stack;
+	stack_t *temp = *stack;
 
 	while (temp != NULL)
 	{
@@ -20,7 +20,7 @@ void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 		printf("\n");
 		temp = temp->next;
 	}
-  
+
 
 }
 
@@ -33,7 +33,7 @@ void _pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 
 void _pint(stack_t **stack, unsigned int line_number)
 {
-	if(!(*stack))
+	if (!(*stack))
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
@@ -52,18 +52,18 @@ void _pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
-	if(!(*stack))
-		{
-			fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-    temp = *stack;
+	if (!*stack)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = *stack;
 
-    if ((*stack)->next != NULL)
-        *stack = (*stack)->next;
-    else
-        *stack = NULL;
-    free(temp);
+	if ((*stack)->next != NULL)
+		*stack = (*stack)->next;
+	else
+		*stack = NULL;
+	free(temp);
 }
 
 /**
@@ -76,20 +76,20 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 void _add(stack_t **stack, unsigned int line_number)
 {
-    stack_t *temp;
-    int i = 0;
+	stack_t *temp;
+	int i = 0;
 
-    if(!(*stack) || !(*stack)->next)
-		{
-			fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-    temp = *stack;
-    i = temp->n;
-    *stack = (*stack)->next;
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = *stack;
+	i = temp->n;
+	*stack = (*stack)->next;
 	free(temp);
 	(*stack)->prev = NULL;
-    (*stack)->n = (*stack)->n + i;
+	(*stack)->n = (*stack)->n + i;
 }
 
 /**

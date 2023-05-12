@@ -9,7 +9,7 @@ extern char **segm;
  */
 void free_arr(char **array)
 {
-    int i = 0;
+	int i = 0;
 
 	if (array == NULL)
 		return;
@@ -38,7 +38,7 @@ char *get_command(FILE *f)
 }
 /**
  * split_command - split a command line
- * @string: string whit commands 
+ * @string: string whit commands
  * @parameter: string with separator characters
  * Return: nothing
  */
@@ -50,11 +50,11 @@ void split_command(char *string, char *parameter)
 	copy_input = strdup(string);
 	token = strtok(copy_input, parameter);
 	if (!token)
-		{
-			free(copy_input);
-			segm = NULL;
-			return;
-		}
+	{
+		free(copy_input);
+		segm = NULL;
+		return;
+	}
 	segm = (char **)malloc(sizeof(char *) * (len + 1));
 	if (segm == NULL)
 	{
@@ -68,7 +68,6 @@ void split_command(char *string, char *parameter)
 	}
 	free(copy_input);
 	segm[len] = NULL;
-	return;
 }
 
 /**
@@ -84,15 +83,15 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *temp = *stack;
 	int i = 0;
 
-	if(!(segm[1]))
-		{
-			free_stack(*stack);
-			free_arr(segm);
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-	for(; segm[1][i] != '\0'; i++)
-		if(strchr("-0123456789", segm[1][i]) == NULL)
+	if (!segm[1])
+	{
+		free_stack(*stack);
+		free_arr(segm);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	for (; segm[1][i] != '\0'; i++)
+		if (strchr("-0123456789", segm[1][i]) == NULL)
 		{
 			free_stack(*stack);
 			free_arr(segm);
