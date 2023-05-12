@@ -1,7 +1,5 @@
 #include "monty.h"
 
-extern char **segm;
-
 /**
  * free_arr - free all the array
  * @array: array to free
@@ -42,9 +40,9 @@ char *get_command(FILE *f)
  * @parameter: string with separator characters
  * Return: nothing
  */
-void split_command(char *string, char *parameter)
+char **split_command(char *string, char *parameter)
 {
-	char *copy_input = NULL, *token = NULL;
+	char *copy_input = NULL, *token = NULL, **segm = NULL;
 	int len = 2;
 
 	copy_input = strdup(string);
@@ -52,14 +50,13 @@ void split_command(char *string, char *parameter)
 	if (!token)
 	{
 		free(copy_input);
-		segm = NULL;
-		return;
+		return (NULL);
 	}
 	segm = (char **)malloc(sizeof(char *) * (len + 1));
 	if (segm == NULL)
 	{
 		free(copy_input);
-		return;
+		return (NULL);
 	}
 	for (len = 0; len < 2 && token; len++)
 	{
@@ -68,52 +65,21 @@ void split_command(char *string, char *parameter)
 	}
 	free(copy_input);
 	segm[len] = NULL;
+	return (segm);
 }
 
 /**
- * _push - add a node to the top of the stack
+ * _nop - do nothing
+ * to the next node and removes the top node of the stack
  * @stack: linked list with the stack
  * @line_number: number of line
  * Return: nothing
  */
 
-void _push(stack_t **stack, unsigned int line_number)
+void _nop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new = NULL;
-	stack_t *temp = *stack;
-	int i = 0;
-
-	if (!segm[1])
-	{
-		free_stack(*stack);
-		free_arr(segm);
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	for (; segm[1][i] != '\0'; i++)
-		if (strchr("-0123456789", segm[1][i]) == NULL)
-		{
-			free_stack(*stack);
-			free_arr(segm);
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-		return;
-	new->n = atoi(segm[1]);
-	if (temp)
-	{
-		temp->prev = new;
-		new->next = temp;
-		(*stack) = new;
-	}
-	else
-	{
-		*stack = new;
-		new->next = NULL;
-	}
-	new->prev = NULL;
+	(void)stack;
+	(void)line_number;
 }
 
 /**

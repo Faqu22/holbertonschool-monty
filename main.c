@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 		command = get_command(file);
 		if (command == NULL)
 			break;
-		split_command(command, " \n\t");
+		segm = split_command(command, " \n\t");
 		free(command);
 		if (segm == NULL)
 			continue;
@@ -51,4 +51,50 @@ int main(int argc, char **argv)
 	}
 	fclose(file);
 	free_stack(list);
+}
+
+/**
+ * _push - add a node to the top of the stack
+ * @stack: linked list with the stack
+ * @line_number: number of line
+ * Return: nothing
+ */
+
+void _push(stack_t **stack, unsigned int line_number)
+{
+	stack_t *new = NULL;
+	stack_t *temp = *stack;
+	int i = 0;
+
+	if (!segm[1])
+	{
+		free_stack(*stack);
+		free_arr(segm);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	for (; segm[1][i] != '\0'; i++)
+		if (strchr("-0123456789", segm[1][i]) == NULL)
+		{
+			free_stack(*stack);
+			free_arr(segm);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+		return;
+	new->n = atoi(segm[1]);
+	if (temp)
+	{
+		temp->prev = new;
+		new->next = temp;
+		(*stack) = new;
+	}
+	else
+	{
+		*stack = new;
+		new->next = NULL;
+	}
+	new->prev = NULL;
 }

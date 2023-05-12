@@ -45,7 +45,7 @@ void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *head);
 char *get_command(FILE *f);
-void split_command(char *string, char *parameter);
+char **split_command(char *string, char *parameter);
 void free_arr(char **array);
 void print_dlistint(const stack_t *h);
 #endif
